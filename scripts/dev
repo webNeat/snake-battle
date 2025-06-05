@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+bunx nodemon --config ./scripts/nodemon.json

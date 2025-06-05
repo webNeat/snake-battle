@@ -1,0 +1,5 @@
+name = "Snake Battle"
+love_version = "11.5"
+love_files = ["./main.lua", "./src/**"]
+build_directory = "build"
+default_targets = ["win64", "appimage"]

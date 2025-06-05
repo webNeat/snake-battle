@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: sudo apt-get update && sudo apt-get install --assume-yes wine-stable wine64 python3-pip
+    - run: pip3 install makelove
+    - run: python3 -m makelove
+    - name: Create Release and Upload Artifacts
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v${{ github.run_number }}
+        name: Release ${{ github.run_number }}
+        body: |
+          Automated release of Snake Battle.
+        files: |
+          build/love/"Snake Battle.love"
+          build/appimage/SnakeBattle.AppImage
+          build/win64/"Snake Battle_win64.zip"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
